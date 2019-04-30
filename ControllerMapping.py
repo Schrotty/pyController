@@ -1,0 +1,23 @@
+BTN_SOUTH = []
+BTN_WEST = []
+BTN_NORTH = []
+BTN_EAST = []
+
+STICK_LEFT_X = []
+STICK_LEFT_Y = []
+
+STICK_RIGHT_X = []
+STICK_RIGHT_Y = []
+
+CROSS_X = []
+CROSS_Y = []
+
+TRIGGER_R = []
+SHOULDR_R = []
+
+TRIGGER_L = []
+SHOULDR_L = []
+
+SELECT = []
+START = []
+
