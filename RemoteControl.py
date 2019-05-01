@@ -69,7 +69,7 @@ class RemoteControl:
             ControllerMapping.STICK_RIGHT_Y = profile['STICK_R_Y'][0]
             ControllerMapping.STICK_RIGHT_X = profile['STICK_R_X'][0]
             ControllerMapping.STICK_LEFT_Y = profile['STICK_L_Y'][0]
-            ControllerMapping.STICK_LEFT_X = profile['STICK_R_X'][0]
+            ControllerMapping.STICK_LEFT_X = profile['STICK_L_X'][0]
 
             # TRIGGER AND SHOULDER
             ControllerMapping.TRIGGER_R = profile['TRIGGER_R'][0]
@@ -94,8 +94,10 @@ class RemoteControl:
                 code = event.code
                 state = event.state
 
+                self.events.on_any(code, state)
+
                 # BUTTON RELEASED
-                if state == 1:
+                if state == 0:
 
                     # RIGHT BUTTONS
                     if code in ControllerMapping.BTN_NORTH:
@@ -151,3 +153,64 @@ class RemoteControl:
                                 self.events.on_cross_east_r(code, state)
                             else:
                                 self.events.on_cross_west_r(code, state)
+
+                # TRIGGERS
+                if code in ControllerMapping.TRIGGER_L or code in ControllerMapping.TRIGGER_R:
+
+                    # LEFT TRIGGER
+                    if code in ControllerMapping.TRIGGER_L:
+                        self.events.on_trigger_left(code, state)
+
+                    # RIGHT TRIGGER
+                    if code in ControllerMapping.TRIGGER_R:
+                        self.events.on_trigger_right(code, state)
+
+                # SHOULDERS
+                if code in ControllerMapping.SHOULDR_L or code in ControllerMapping.SHOULDR_R:
+
+                    # LEFT SHOULDER
+                    if code in ControllerMapping.SHOULDR_L:
+
+                        # ON RELEASE
+                        if state == 0:
+                            self.events.on_shoulder_left_r(code, state)
+
+                        # WHEN PRESSED
+                        if state == 1:
+                            self.events.on_shoulder_left_p(code, state)
+
+                    # RIGHT SHOULDER
+                    if code in ControllerMapping.SHOULDR_R:
+
+                        # ON RELEASE
+                        if state == 0:
+                            self.events.on_shoulder_right_r(code, state)
+
+                        # WHEN PRESSED
+                        if state == 1:
+                            self.events.on_shoulder_right_p(code, state)
+
+                # LEFT STICK
+                if code in ControllerMapping.STICK_LEFT_X or code in ControllerMapping.STICK_LEFT_Y:
+
+                    # X-AXIS
+                    if code in ControllerMapping.STICK_LEFT_X:
+
+                        # MOVEMENT EAST
+                        if state > 0:
+                            self.events.on_stick_left_east(code, state)
+
+                        # MOVEMENT WEST
+                        if state < 0:
+                            self.events.on_stick_left_west(code, state)
+
+                    # Y-AXIS
+                    if code in ControllerMapping.STICK_LEFT_Y:
+
+                        # MOVEMENT NORTH
+                        if state > 0:
+                            self.events.on_stick_left_north(code, state)
+
+                        # MOVEMENT SOUTH
+                        if state < 0:
+                            self.events.on_stick_left_south(code, state)
