@@ -5,9 +5,11 @@ BTN_EAST = []
 
 STICK_LEFT_X = []
 STICK_LEFT_Y = []
+THUMB_L = []
 
 STICK_RIGHT_X = []
 STICK_RIGHT_Y = []
+THUMB_R = []
 
 CROSS_X = []
 CROSS_Y = []

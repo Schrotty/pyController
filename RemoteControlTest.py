@@ -9,7 +9,7 @@ def start(code, state):
     print "> Pressed start"
 
 
-remote = RemoteControl()
+remote = RemoteControl(debug_mode=True)
 if remote.is_available():
     remote.start()
 
@@ -43,11 +43,9 @@ if remote.is_available():
     remote.events.on_shoulder_right_p += event_handler
     remote.events.on_shoulder_right_r += event_handler
 
-    remote.events.on_stick_left_reset += event_handler
-
-    # remote.events.on_stick_left_north += event_handler
-    # remote.events.on_stick_left_south += event_handler
+    remote.events.on_stick_left_north += event_handler
+    remote.events.on_stick_left_south += event_handler
     remote.events.on_stick_left_east += event_handler
     remote.events.on_stick_left_west += event_handler
 
-    # remote.events.on_any += event_handler
+    remote.events.on_any += event_handler

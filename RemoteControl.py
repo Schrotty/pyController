@@ -6,13 +6,14 @@ from RemoteControlEvents import RemoteControlEvents
 
 
 class RemoteControl:
-    def __init__(self, profile="default"):
+    def __init__(self, profile="default", debug_mode=False):
         self.events = RemoteControlEvents()
 
         self.profile = profile
         self.thread = None
         self.remote_found = True
         self.remote_online = False
+        self.debug_mode = debug_mode
 
         print "> INIT REMOTE CONTROL"
         print "> Looking for gamepad..."
@@ -23,7 +24,7 @@ class RemoteControl:
             print "> Gamepad detected!"
 
         print ">"
-        print "> Load profile '" + self.profile + "'"
+        print "> Loading profile '" + self.profile + "'"
         self.load_profile()
         print "> Profile loaded!"
         print ">"
@@ -77,6 +78,10 @@ class RemoteControl:
             ControllerMapping.TRIGGER_L = profile['TRIGGER_L'][0]
             ControllerMapping.SHOULDR_L = profile['SHOULDER_L'][0]
 
+            # THUMBS
+            ControllerMapping.THUMB_R = profile['THUMB_R'][0]
+            ControllerMapping.THUMB_L = profile['THUMB_L'][0]
+
         except (KeyError, IOError):
             print "> Invalid profile! Switching back to default!"
             self.profile = "default"
@@ -94,7 +99,8 @@ class RemoteControl:
                 code = event.code
                 state = event.state
 
-                self.events.on_any(code, state)
+                if self.debug_mode:
+                    self.events.on_any(code, state)
 
                 # BUTTON RELEASED
                 if state == 0:
@@ -214,3 +220,28 @@ class RemoteControl:
                         # MOVEMENT SOUTH
                         if state < 0:
                             self.events.on_stick_left_south(code, state)
+
+                # RIGHT STICK
+                if code in ControllerMapping.STICK_RIGHT_X or code in ControllerMapping.STICK_RIGHT_Y:
+
+                    # X-AXIS
+                    if code in ControllerMapping.STICK_RIGHT_X:
+
+                        # MOVEMENT EAST
+                        if state > 0:
+                            self.events.on_stick_right_east(code, state)
+
+                        # MOVEMENT WEST
+                        if state < 0:
+                            self.events.on_stick_right_west(code, state)
+
+                    # Y-AXIS
+                    if code in ControllerMapping.STICK_RIGHT_Y:
+
+                        # MOVEMENT NORTH
+                        if state > 0:
+                            self.events.on_stick_right_north(code, state)
+
+                        # MOVEMENT SOUTH
+                        if state < 0:
+                            self.events.on_stick_right_south(code, state)
