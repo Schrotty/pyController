@@ -10,6 +10,7 @@ class RemoteControl:
         self.events = RemoteControlEvents()
 
         self.profile = profile
+        self.controller_name = "Unknown"
         self.thread = None
         self.remote_found = True
         self.remote_online = False
@@ -26,7 +27,7 @@ class RemoteControl:
         print ">"
         print "> Loading profile '" + self.profile + "'"
         self.load_profile()
-        print "> Profile loaded!"
+        print "> Profile for '" + self.controller_name + "' loaded!"
         print ">"
 
         if self.remote_found:
@@ -51,6 +52,9 @@ class RemoteControl:
     def load_profile(self):
         try:
             profile = pandas.read_csv('profiles/' + self.profile + '.csv')
+
+            # CONTROLLER NAME
+            self.controller_name = profile['CONTROLLER'][0]
 
             # LEFT BUTTONS
             ControllerMapping.BTN_NORTH = profile['BTN_NORTH'][0]
