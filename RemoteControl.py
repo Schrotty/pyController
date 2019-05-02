@@ -82,6 +82,12 @@ class RemoteControl:
             ControllerMapping.THUMB_R = profile['THUMB_R'][0]
             ControllerMapping.THUMB_L = profile['THUMB_L'][0]
 
+            # STICK VALUES
+            ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX'][0]
+            ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN'][0]
+            ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX'][0]
+            ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN'][0]
+
         except (KeyError, IOError):
             print "> Invalid profile! Switching back to default!"
             self.profile = "default"
@@ -199,8 +205,14 @@ class RemoteControl:
                 # LEFT STICK
                 if code in ControllerMapping.STICK_LEFT_X or code in ControllerMapping.STICK_LEFT_Y:
 
+                    # ANY MOVEMENT
+                    self.events.on_stick_left(code, state)
+
                     # X-AXIS
                     if code in ControllerMapping.STICK_LEFT_X:
+
+                        # ANY X-AXIS MOVEMENT
+                        self.events.on_stick_left_x(code, state)
 
                         # MOVEMENT EAST
                         if state > 0:
@@ -213,6 +225,9 @@ class RemoteControl:
                     # Y-AXIS
                     if code in ControllerMapping.STICK_LEFT_Y:
 
+                        # ANY Y-AXIS MOVEMENT
+                        self.events.on_stick_left_y(code, state)
+
                         # MOVEMENT NORTH
                         if state > 0:
                             self.events.on_stick_left_north(code, state)
@@ -224,8 +239,14 @@ class RemoteControl:
                 # RIGHT STICK
                 if code in ControllerMapping.STICK_RIGHT_X or code in ControllerMapping.STICK_RIGHT_Y:
 
+                    # ANY MOVEMENT
+                    self.events.on_stick_right(code, state)
+
                     # X-AXIS
                     if code in ControllerMapping.STICK_RIGHT_X:
+
+                        # ANY X-AXIS MOVEMENT
+                        self.events.on_stick_right_x(code, state)
 
                         # MOVEMENT EAST
                         if state > 0:
@@ -237,6 +258,9 @@ class RemoteControl:
 
                     # Y-AXIS
                     if code in ControllerMapping.STICK_RIGHT_Y:
+
+                        # ANY Y-AXIS MOVEMENT
+                        self.events.on_stick_right_y(code, state)
 
                         # MOVEMENT NORTH
                         if state > 0:
