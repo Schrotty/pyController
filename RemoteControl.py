@@ -94,6 +94,7 @@ class RemoteControl:
 
             # STICK DEAD ZONES
             ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD'][0]
+            ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD'][0]
 
         except (KeyError, IOError):
             print "> Invalid profile! Switching back to default!"
