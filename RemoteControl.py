@@ -223,7 +223,7 @@ class RemoteControl:
                     if code in ControllerMapping.STICK_LEFT_X:
 
                         # ANY X-AXIS MOVEMENT
-                        self.events.on_stick_left_x(code, state)
+                        self.events.on_stick_left_x(code, self.calc_stick_percent(ControllerMapping.STICK_L_MAX, state))
 
                         # MOVEMENT EAST
                         if state > ControllerMapping.STICK_L_DEAD:
@@ -241,7 +241,7 @@ class RemoteControl:
                     if code in ControllerMapping.STICK_LEFT_Y:
 
                         # ANY Y-AXIS MOVEMENT
-                        self.events.on_stick_left_y(code, state)
+                        self.events.on_stick_left_y(code, self.calc_stick_percent(ControllerMapping.STICK_L_MAX, state))
 
                         # MOVEMENT NORTH
                         if state > ControllerMapping.STICK_L_DEAD:
@@ -265,7 +265,7 @@ class RemoteControl:
                     if code in ControllerMapping.STICK_RIGHT_X:
 
                         # ANY X-AXIS MOVEMENT
-                        self.events.on_stick_right_x(code, state)
+                        self.events.on_stick_right_x(code, self.calc_stick_percent(ControllerMapping.STICK_R_MAX, state))
 
                         # MOVEMENT EAST
                         if state > ControllerMapping.STICK_R_DEAD:
@@ -283,7 +283,7 @@ class RemoteControl:
                     if code in ControllerMapping.STICK_RIGHT_Y:
 
                         # ANY Y-AXIS MOVEMENT
-                        self.events.on_stick_right_y(code, state)
+                        self.events.on_stick_right_y(code, self.calc_stick_percent(ControllerMapping.STICK_R_MAX, state))
 
                         # MOVEMENT NORTH
                         if state > ControllerMapping.STICK_R_DEAD:
