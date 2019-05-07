@@ -1,3 +1,4 @@
+import csv
 import threading
 import ControllerMapping
 import pandas
@@ -51,50 +52,55 @@ class RemoteControl:
 
     def load_profile(self):
         try:
-            profile = pandas.read_csv('profiles/' + self.profile + '.csv')
 
-            # CONTROLLER NAME
-            self.controller_name = profile['CONTROLLER'][0]
+            with open('profiles/' + self.profile + '.csv') as file:
+                reader = csv.DictReader(file)
 
-            # LEFT BUTTONS
-            ControllerMapping.BTN_NORTH = profile['BTN_NORTH'][0]
-            ControllerMapping.BTN_EAST = profile['BTN_EAST'][0]
-            ControllerMapping.BTN_SOUTH = profile['BTN_SOUTH'][0]
-            ControllerMapping.BTN_WEST = profile['BTN_WEST'][0]
+                for profile in reader:
+                    # CONTROLLER NAME
+                    self.controller_name = profile['CONTROLLER'][0]
 
-            # START AND SELECT
-            ControllerMapping.START = profile['START'][0]
-            ControllerMapping.SELECT = profile['SELECT'][0]
+                    # LEFT BUTTONS
+                    ControllerMapping.BTN_NORTH = profile['BTN_NORTH'][0]
+                    ControllerMapping.BTN_EAST = profile['BTN_EAST'][0]
+                    ControllerMapping.BTN_SOUTH = profile['BTN_SOUTH'][0]
+                    ControllerMapping.BTN_WEST = profile['BTN_WEST'][0]
 
-            # CROSS
-            ControllerMapping.CROSS_Y = profile['CROSS_Y'][0]
-            ControllerMapping.CROSS_X = profile['CROSS_X'][0]
+                    # START AND SELECT
+                    ControllerMapping.START = profile['START'][0]
+                    ControllerMapping.SELECT = profile['SELECT'][0]
 
-            # STICK R & STICK L
-            ControllerMapping.STICK_RIGHT_Y = profile['STICK_R_Y'][0]
-            ControllerMapping.STICK_RIGHT_X = profile['STICK_R_X'][0]
-            ControllerMapping.STICK_LEFT_Y = profile['STICK_L_Y'][0]
-            ControllerMapping.STICK_LEFT_X = profile['STICK_L_X'][0]
+                    # CROSS
+                    ControllerMapping.CROSS_Y = profile['CROSS_Y'][0]
+                    ControllerMapping.CROSS_X = profile['CROSS_X'][0]
 
-            # TRIGGER AND SHOULDER
-            ControllerMapping.TRIGGER_R = profile['TRIGGER_R'][0]
-            ControllerMapping.SHOULDR_R = profile['SHOULDER_R'][0]
-            ControllerMapping.TRIGGER_L = profile['TRIGGER_L'][0]
-            ControllerMapping.SHOULDR_L = profile['SHOULDER_L'][0]
+                    # STICK R & STICK L
+                    ControllerMapping.STICK_RIGHT_Y = profile['STICK_R_Y'][0]
+                    ControllerMapping.STICK_RIGHT_X = profile['STICK_R_X'][0]
+                    ControllerMapping.STICK_LEFT_Y = profile['STICK_L_Y'][0]
+                    ControllerMapping.STICK_LEFT_X = profile['STICK_L_X'][0]
 
-            # THUMBS
-            ControllerMapping.THUMB_R = profile['THUMB_R'][0]
-            ControllerMapping.THUMB_L = profile['THUMB_L'][0]
+                    # TRIGGER AND SHOULDER
+                    ControllerMapping.TRIGGER_R = profile['TRIGGER_R'][0]
+                    ControllerMapping.SHOULDR_R = profile['SHOULDER_R'][0]
+                    ControllerMapping.TRIGGER_L = profile['TRIGGER_L'][0]
+                    ControllerMapping.SHOULDR_L = profile['SHOULDER_L'][0]
 
-            # STICK VALUES
-            ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX'][0]
-            ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN'][0]
-            ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX'][0]
-            ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN'][0]
+                    # THUMBS
+                    ControllerMapping.THUMB_R = profile['THUMB_R'][0]
+                    ControllerMapping.THUMB_L = profile['THUMB_L'][0]
 
-            # STICK DEAD ZONES
-            ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD'][0]
-            ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD'][0]
+                    # STICK VALUES
+                    ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX'][0]
+                    ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN'][0]
+                    ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX'][0]
+                    ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN'][0]
+
+                    # STICK DEAD ZONES
+                    ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD'][0]
+                    ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD'][0]
+
+            # profile = pandas.read_csv('profiles/' + self.profile + '.csv')
 
         except (KeyError, IOError):
             print "> Invalid profile! Switching back to default!"
