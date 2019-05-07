@@ -1,7 +1,6 @@
 import csv
 import threading
 import ControllerMapping
-import pandas
 from inputs import devices, get_gamepad
 from RemoteControlEvents import RemoteControlEvents
 
