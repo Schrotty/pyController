@@ -52,7 +52,7 @@ class RemoteControl:
     def load_profile(self):
         try:
 
-            with open('profiles/' + self.profile + '.csv') as file:
+            with open('profiles/' + self.profile + '.csv', 'r+') as file:
                 reader = csv.DictReader(file)
 
                 for profile in reader:
