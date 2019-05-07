@@ -9,12 +9,14 @@ class RemoteControl:
     def __init__(self, profile="default", debug_mode=False):
         self.events = RemoteControlEvents()
 
+        self.tries_loading_profile = 1
         self.profile = profile
         self.controller_name = "Unknown"
         self.thread = None
         self.remote_found = True
         self.remote_online = False
         self.debug_mode = debug_mode
+        self.profile_loaded = False
 
         print "> INIT REMOTE CONTROL"
         print "> Looking for gamepad..."
@@ -26,11 +28,16 @@ class RemoteControl:
 
         print ">"
         print "> Loading profile '" + self.profile + "'"
+
         self.load_profile()
-        print "> Profile for '" + self.controller_name + "' loaded!"
+        if not self.profile_loaded:
+            print "> Unable to load a profile!"
+        else:
+            print "> Profile for '" + self.controller_name + "' loaded!"
+
         print ">"
 
-        if self.remote_found:
+        if self.remote_found and self.profile_loaded:
             print "> Remote control is now available!"
         else:
             print "> Remote control is unavailable!"
@@ -52,10 +59,12 @@ class RemoteControl:
     def load_profile(self):
         try:
 
+            self.tries_loading_profile += 1
             with open('profiles/' + self.profile + '.csv', 'r+') as file:
                 reader = csv.DictReader(file)
 
                 for profile in reader:
+
                     # CONTROLLER NAME
                     self.controller_name = profile['CONTROLLER']
 
@@ -99,12 +108,16 @@ class RemoteControl:
                     ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD']
                     ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD']
 
+                    self.profile_loaded = True
             # profile = pandas.read_csv('profiles/' + self.profile + '.csv')
 
         except (KeyError, IOError):
             print "> Invalid profile! Switching back to default!"
             self.profile = "default"
-            self.load_profile()
+            if self.tries_loading_profile == 1:
+                self.load_profile()
+            else:
+                self.profile_loaded = False
 
     def is_available(self):
         return self.remote_found
