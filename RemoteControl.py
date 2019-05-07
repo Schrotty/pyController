@@ -57,47 +57,47 @@ class RemoteControl:
 
                 for profile in reader:
                     # CONTROLLER NAME
-                    self.controller_name = profile['CONTROLLER'][0]
+                    self.controller_name = profile['CONTROLLER']
 
                     # LEFT BUTTONS
-                    ControllerMapping.BTN_NORTH = profile['BTN_NORTH'][0]
-                    ControllerMapping.BTN_EAST = profile['BTN_EAST'][0]
-                    ControllerMapping.BTN_SOUTH = profile['BTN_SOUTH'][0]
-                    ControllerMapping.BTN_WEST = profile['BTN_WEST'][0]
+                    ControllerMapping.BTN_NORTH = profile['BTN_NORTH']
+                    ControllerMapping.BTN_EAST = profile['BTN_EAST']
+                    ControllerMapping.BTN_SOUTH = profile['BTN_SOUTH']
+                    ControllerMapping.BTN_WEST = profile['BTN_WEST']
 
                     # START AND SELECT
-                    ControllerMapping.START = profile['START'][0]
-                    ControllerMapping.SELECT = profile['SELECT'][0]
+                    ControllerMapping.START = profile['START']
+                    ControllerMapping.SELECT = profile['SELECT']
 
                     # CROSS
-                    ControllerMapping.CROSS_Y = profile['CROSS_Y'][0]
-                    ControllerMapping.CROSS_X = profile['CROSS_X'][0]
+                    ControllerMapping.CROSS_Y = profile['CROSS_Y']
+                    ControllerMapping.CROSS_X = profile['CROSS_X']
 
                     # STICK R & STICK L
-                    ControllerMapping.STICK_RIGHT_Y = profile['STICK_R_Y'][0]
-                    ControllerMapping.STICK_RIGHT_X = profile['STICK_R_X'][0]
-                    ControllerMapping.STICK_LEFT_Y = profile['STICK_L_Y'][0]
-                    ControllerMapping.STICK_LEFT_X = profile['STICK_L_X'][0]
+                    ControllerMapping.STICK_RIGHT_Y = profile['STICK_R_Y']
+                    ControllerMapping.STICK_RIGHT_X = profile['STICK_R_X']
+                    ControllerMapping.STICK_LEFT_Y = profile['STICK_L_Y']
+                    ControllerMapping.STICK_LEFT_X = profile['STICK_L_X']
 
                     # TRIGGER AND SHOULDER
-                    ControllerMapping.TRIGGER_R = profile['TRIGGER_R'][0]
-                    ControllerMapping.SHOULDR_R = profile['SHOULDER_R'][0]
-                    ControllerMapping.TRIGGER_L = profile['TRIGGER_L'][0]
-                    ControllerMapping.SHOULDR_L = profile['SHOULDER_L'][0]
+                    ControllerMapping.TRIGGER_R = profile['TRIGGER_R']
+                    ControllerMapping.SHOULDR_R = profile['SHOULDER_R']
+                    ControllerMapping.TRIGGER_L = profile['TRIGGER_L']
+                    ControllerMapping.SHOULDR_L = profile['SHOULDER_L']
 
                     # THUMBS
-                    ControllerMapping.THUMB_R = profile['THUMB_R'][0]
-                    ControllerMapping.THUMB_L = profile['THUMB_L'][0]
+                    ControllerMapping.THUMB_R = profile['THUMB_R']
+                    ControllerMapping.THUMB_L = profile['THUMB_L']
 
                     # STICK VALUES
-                    ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX'][0]
-                    ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN'][0]
-                    ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX'][0]
-                    ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN'][0]
+                    ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX']
+                    ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN']
+                    ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX']
+                    ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN']
 
                     # STICK DEAD ZONES
-                    ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD'][0]
-                    ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD'][0]
+                    ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD']
+                    ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD']
 
             # profile = pandas.read_csv('profiles/' + self.profile + '.csv')
 
