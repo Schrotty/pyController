@@ -1,3 +1,4 @@
+import os
 import csv
 import threading
 import ControllerMapping
@@ -59,9 +60,14 @@ class RemoteControl:
     def load_profile(self):
         try:
 
+            path = 'profiles/' + self.profile + '.csv'
+            if not os.path.isfile(path):
+                print "> Profile '" + self.profile + "' not found!"
+                return
+
             self.tries_loading_profile += 1
-            with open('profiles/' + self.profile + '.csv', 'r+') as file:
-                reader = csv.DictReader(file)
+            with open(path, 'r+') as csvFile:
+                reader = csv.DictReader(csvFile)
 
                 for profile in reader:
 
