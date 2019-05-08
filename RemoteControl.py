@@ -66,7 +66,7 @@ class RemoteControl:
                 return
 
             self.tries_loading_profile += 1
-            with open(path, 'r+') as csvFile:
+            with open(path, 'r') as csvFile:
                 reader = csv.DictReader(csvFile)
 
                 for profile in reader:
@@ -105,14 +105,15 @@ class RemoteControl:
                     ControllerMapping.THUMB_L = profile['THUMB_L']
 
                     # STICK VALUES
-                    ControllerMapping.STICK_L_MAX = profile['STICK_L_MAX']
-                    ControllerMapping.STICK_L_MIN = profile['STICK_L_MIN']
-                    ControllerMapping.STICK_R_MAX = profile['STICK_R_MAX']
-                    ControllerMapping.STICK_R_MIN = profile['STICK_R_MIN']
+                    ControllerMapping.STICK_CENTER = int(profile['STICK_CENTER'])
+                    ControllerMapping.STICK_L_MAX = int(profile['STICK_L_MAX'])
+                    ControllerMapping.STICK_L_MIN = int(profile['STICK_L_MIN'])
+                    ControllerMapping.STICK_R_MAX = int(profile['STICK_R_MAX'])
+                    ControllerMapping.STICK_R_MIN = int(profile['STICK_R_MIN'])
 
                     # STICK DEAD ZONES
-                    ControllerMapping.STICK_L_DEAD = profile['STICK_L_DEAD']
-                    ControllerMapping.STICK_R_DEAD = profile['STICK_R_DEAD']
+                    ControllerMapping.STICK_L_DEAD = int(profile['STICK_L_DEAD'])
+                    ControllerMapping.STICK_R_DEAD = int(profile['STICK_R_DEAD'])
 
                     self.profile_loaded = True
             # profile = pandas.read_csv('profiles/' + self.profile + '.csv')
